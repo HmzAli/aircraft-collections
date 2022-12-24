@@ -1,11 +1,8 @@
 /* DB setup */
-CREATE DATABASE aircollections;
-CREATE USER superadmin WITH ENCRYPTED PASSWORD 'Abcd123';
-GRANT ALL PRIVILEGES ON DATABASE aircollections TO superadmin;
-
+CREATE SCHEMA airshow;
 
 /* Tables setup */
-CREATE TABLE aircollections.aircraft (
+CREATE TABLE airshow.aircraft (
   id SERIAL,
   name varchar(255) NOT NULL,
   category varchar(255) NOT NULL,
@@ -14,4 +11,4 @@ CREATE TABLE aircollections.aircraft (
 
 
 /* Initial data */
-INSERT INTO aircollections.aircraft VALUES (1, 'P-52 Mustang', 'Fighter', NULL);
+INSERT INTO airshow.aircraft VALUES (1, 'P-52 Mustang', 'Fighter', NULL);

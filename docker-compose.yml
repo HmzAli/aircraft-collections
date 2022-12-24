@@ -9,7 +9,7 @@ services:
     depends_on:
       - db
     networks:
-      - aircraft
+      - airshow
 
   db:
     image: postgres:12.13-alpine3.17
@@ -17,13 +17,13 @@ services:
     restart: always
     env_file: .env
     volumes:
-      - .seed/:/docker-entrypoint-initdb.d
+      - ./.seed/:/docker-entrypoint-initdb.d
       - db:/var/lib/postgresql/data
     networks:
-      - aircraft
+      - airshow
 
 volumes:
   db:
 
 networks:
-  aircraft:
+  airshow:
