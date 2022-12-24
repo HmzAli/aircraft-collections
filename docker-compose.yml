@@ -4,6 +4,7 @@ services:
   web:
     build:
       context: .
+    container_name: dev_web
     env_file: .env
     depends_on:
       - db
@@ -12,6 +13,7 @@ services:
 
   db:
     image: postgres:12.13-alpine3.17
+    container_name: dev_db
     restart: always
     env_file: .env
     volumes:
