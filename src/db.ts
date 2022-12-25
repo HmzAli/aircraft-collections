@@ -29,7 +29,7 @@ const query = async (query:string): Promise<any> => {
             return response.rows
         })
         .catch(error => {
-            console.log('db: failed to fetch query results: ', error)
+            console.log('db: failed to execute query: ', error)
             throw error
         })
 }

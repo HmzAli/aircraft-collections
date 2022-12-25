@@ -1,7 +1,7 @@
-import { Controller, Get, Post, Delete, Body } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Body, HttpCode} from '@nestjs/common';
 import { Aircraft } from './types';
 import { AppService } from './app.service';
-import { Request } from 'express';
+import { Request,} from 'express';
 
 @Controller()
 export class AppController {
@@ -18,8 +18,15 @@ export class AppController {
     return aircraft
   }
 
+  @HttpCode(201)
   @Post('/v1/aircraft')
-  async createAircraft(@Body() aircraftData: Aircraft) {
-    
+  async createAircraft(@Body() aircraftData: Aircraft): Promise<string> {
+    try {
+      await this.appService.create(aircraftData)
+    } catch(error) {
+      throw error
+    }
+
+    return 'Aircraft added successfully'
   }
 }

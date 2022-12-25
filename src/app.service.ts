@@ -19,12 +19,21 @@ export class AppService {
       console.log('Failed to fetch aircrafts')
       throw error
     }
-     
-    console.log(results);
+
     return results
   }
 
-  create(aircraftData: Aircraft) {
-    
+  async create(aircraftData: Aircraft) {
+    // simple validation
+    if (!aircraftData.name || !aircraftData.category) {
+      throw new HttpException('Invalid post data', HttpStatus.BAD_REQUEST);
+    }
+
+    try {
+      await query(`INSERT INTO ${relationName} values (DEFAULT, '${aircraftData.name}', '${aircraftData.category}', '${aircraftData.image || ''}')`)
+    } catch(error) {
+      console.log('Faild to create an aircraft')
+      throw error
+    }
   }
 }
