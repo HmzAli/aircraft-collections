@@ -1,24 +1,30 @@
-import { Injectable } from '@nestjs/common';
-import { Aircaft } from './aircraft';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { Aircraft } from './types';
+import { query } from './db';
+
+const relationName: string = 'aircraft'
 
 @Injectable()
 export class AppService {
   getHome(): string {
-    return 'Hello World!';
+    return 'Hello words!';
   }
 
-  getAll(): Aircaft[] {
-    return [
-      {
-        id: 0,
-        name: '',
-        category: '',
-        image: ''
-      }
-    ]
+  async getAll(): Promise<Aircraft[]> {
+    let results;
+
+    try {
+      results = await query(`SELECT * FROM ${relationName}`)
+    } catch (error) {
+      console.log('Failed to fetch aircrafts')
+      throw error
+    }
+     
+    console.log(results);
+    return results
   }
 
-  create(aircraftData: Aircaft) {
-    console.log('>> ', aircraftData)
+  create(aircraftData: Aircraft) {
+    
   }
 }

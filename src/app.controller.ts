@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Delete, Body } from '@nestjs/common';
-import { Aircaft } from './aircraft';
+import { Aircraft } from './types';
 import { AppService } from './app.service';
 import { Request } from 'express';
 
@@ -13,12 +13,13 @@ export class AppController {
   }
 
   @Get('/v1/aircraft')
-  getAircrafts(): Aircaft[] {
-    return this.appService.getAll()
+  async getAircrafts(): Promise<Aircraft[]> {
+    const aircraft: Aircraft[] = await this.appService.getAll()
+    return aircraft
   }
 
   @Post('/v1/aircraft')
-  async createAircraft(@Body() aircraftData: Aircaft) {
-    return this.appService.create(aircraftData)
+  async createAircraft(@Body() aircraftData: Aircraft) {
+    
   }
 }
