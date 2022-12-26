@@ -7,7 +7,7 @@ const relationName = 'aircraft';
 @Injectable()
 export class AppService {
   getHome(): string {
-    return 'Hello words!';
+    return 'Hello World!';
   }
 
   async getAll(): Promise<Aircraft[]> {
